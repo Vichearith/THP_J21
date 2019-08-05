@@ -4,8 +4,8 @@
       Contenue : <%= @gossips.find(@index).content%><br/>
       Créé le <%= @gossips.find(@index).created_at.strftime("%d/%m/%Y")%><br/>
       Tags : 
-      <%= @gossips.find(@index).tags.map do |i|%><br/>
-      <%=i.title%><br/>
+      <%= @gossips.find(@index).tags.map do |i|%>
+      <%=i.title%>, 
       <%end%><br/>
       <%= @gossips.find(@index).likes.count%> likes<br/> 
       Commentaires : <br/>
