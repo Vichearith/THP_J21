@@ -1,0 +1,8 @@
+<h1>Home</h1>
+<% @gossips.each_with_index do |gossip,index| %>
+    <p>
+    <a href="/gossip/<%=index+1%>"><%= gossip.title %></a><br/>
+      <%= gossip.user.first_name %> <%= gossip.user.last_name %><br/>
+      
+    </p>
+  <% end %>

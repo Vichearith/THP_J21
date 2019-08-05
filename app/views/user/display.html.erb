@@ -1,0 +1,9 @@
+<h1><%= @users.find(@index).first_name%> <%= @users.find(@index).last_name%><br/></h1>
+    <p>
+      Description :<br/>
+      <%= @users.find(@index).description%><br/>
+      <%= @users.find(@index).email%><br/>
+      <%= @users.find(@index).age%> ans<br/>
+      Ville : <%= @users.find(@index).city.name%> <%= @users.find(@index).city.zip_code%><br/>
+      Crée le <%= @users.find(@index).created_at.strftime("%d/%m/%Y")%><br/>
+    </p>

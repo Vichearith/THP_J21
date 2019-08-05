@@ -1,0 +1,19 @@
+<h1><%= @gossips.find(@index).title%></h1>
+    <p>
+      <a href="/user/<%=@gossips.find(@index).user.id%>"><%= @gossips.find(@index).user.first_name%> <%= @gossips.find(@index).user.last_name%><br/></a>
+      Contenue : <%= @gossips.find(@index).content%><br/>
+      Créé le <%= @gossips.find(@index).created_at.strftime("%d/%m/%Y")%><br/>
+      Tags : 
+      <%= @gossips.find(@index).tags.map do |i|%><br/>
+      <%=i.title%><br/>
+      <%end%><br/>
+      <%= @gossips.find(@index).likes.count%> likes<br/> 
+      Commentaires : <br/>
+      <%= @gossips.find(@index).comments.map do |i|%><br/>
+      <%=i.content%> - <%=i.user.first_name%> <%=i.user.last_name%><br/><br/>
+      <%=@comments.where(commentable_id: i.id).map do |j|%>
+      \\<%=j.content%> - <%=j.user.first_name%> <%=j.user.last_name%><br/>
+        <%end%><br/>
+      <%end%><br/>
+      
+    </p>
