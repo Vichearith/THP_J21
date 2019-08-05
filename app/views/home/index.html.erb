@@ -1,8 +1,29 @@
-<h1>Home</h1>
-<% @gossips.each_with_index do |gossip,index| %>
-    <p>
-    <a href="/gossip/<%=index+1%>"><%= gossip.title %></a><br/>
-      <%= gossip.user.first_name %> <%= gossip.user.last_name %><br/>
-      
-    </p>
-  <% end %>
+<main role="main">
+
+  <section class="jumbotron text-center" style="background-image: url('https://images.unsplash.com/photo-1432256851563-20155d0b7a39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');background-position: center center; background-size: cover;">
+    <div class="container">
+      <h1 class="jumbotron-heading">Home</h1>
+      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <% @gossips.each_with_index do |gossip,index| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/gossip/<%=index+1%>"><%= gossip.title %></a></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h6>
+              <p class="card-text"><%= gossip.content %></p>
+              <a href="/gossip/<%=index+1%>" class="card-link">Card link</a>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</main>

@@ -1,9 +1,15 @@
-<h1><%= @users.find(@index).first_name%> <%= @users.find(@index).last_name%><br/></h1>
-    <p>
-      Description :<br/>
-      <%= @users.find(@index).description%><br/>
-      <%= @users.find(@index).email%><br/>
-      <%= @users.find(@index).age%> ans<br/>
-      Ville : <%= @users.find(@index).city.name%> <%= @users.find(@index).city.zip_code%><br/>
-      Crée le <%= @users.find(@index).created_at.strftime("%d/%m/%Y")%><br/>
+<body class="d-flex flex-column h-100">
+  <div class="container">
+    <main role="main" class="my-auto">
+    <h1 class="mt-5"><%= @users.find(@index).first_name%> <%= @users.find(@index).last_name%></h1>
+    <p>Description :<br/>
+    <%= @users.find(@index).description%>
     </p>
+    <p>E-mail : <%= @users.find(@index).email%></p>
+    <p>Âge <%= @users.find(@index).age%> ans</p>
+    <p>Ville : <%= @users.find(@index).city.name%> - <%= @users.find(@index).city.zip_code%></p>
+    <p>Crée le <%= @users.find(@index).created_at.strftime("%d/%m/%Y")%></p>
+    
+    </main>
+  </div>
+</body>

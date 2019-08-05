@@ -1,19 +1,21 @@
-<h1><%= @gossips.find(@index).title%></h1>
-    <p>
-      <a href="/user/<%=@gossips.find(@index).user.id%>"><%= @gossips.find(@index).user.first_name%> <%= @gossips.find(@index).user.last_name%><br/></a>
-      Contenue : <%= @gossips.find(@index).content%><br/>
-      Créé le <%= @gossips.find(@index).created_at.strftime("%d/%m/%Y")%><br/>
-      Tags : 
-      <%= @gossips.find(@index).tags.map do |i|%>
-      <%=i.title%>, 
-      <%end%><br/>
-      <%= @gossips.find(@index).likes.count%> likes<br/> 
-      Commentaires : <br/>
-      <%= @gossips.find(@index).comments.map do |i|%><br/>
-      <%=i.content%> - <%=i.user.first_name%> <%=i.user.last_name%><br/><br/>
-      <%=@comments.where(commentable_id: i.id).map do |j|%>
-      \\<%=j.content%> - <%=j.user.first_name%> <%=j.user.last_name%><br/>
-        <%end%><br/>
-      <%end%><br/>
-      
-    </p>
+<body class="d-flex flex-column h-100">
+  <div class="container">
+    <main role="main" class="my-auto">
+    <h1 class="mt-5"><%= @gossips.find(@index).title%></h1>
+    <p class="lead"><a href="/user/<%=@gossips.find(@index).user.id%>"><%= @gossips.find(@index).user.first_name%> <%= @gossips.find(@index).user.last_name%></a></p>
+    <p>Contenue : <%= @gossips.find(@index).content%><br/></p>
+    <p>  Créé le <%= @gossips.find(@index).created_at.strftime("%d/%m/%Y")%></p>
+    <p>  Tags : <%=@tags_string%></p>
+      Comments : 
+      <% @gossips.find(@index).comments.map do |i| %>
+      <p>
+        <%=i.content%> - <%=i.user.first_name%> <%=i.user.last_name%>      
+        <%@comments.where(commentable_id: i.id).map do |j| %>
+      <br/>➡ <%=j.content%> - <%=j.user.first_name%> <%=j.user.last_name%>
+        <% end %>      
+      </p>
+      <% end %>  
+    
+    </main>
+  </div>
+</body>

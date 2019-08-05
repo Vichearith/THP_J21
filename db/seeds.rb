@@ -30,14 +30,14 @@ end
 
 20.times do
   gossip = Gossip.create!(
-    title:  Faker::Lorem.sentence, 
-    content:  Faker::Lorem.paragraph, 
+    title:  Faker::Game.title, 
+    content:  Faker::Quote.matz, 
     user: User.find(rand(1..10)))
 end
 
 10.times do
   tag = Tag.create!(
-    title:  Faker::Lorem.word)
+    title:  Faker::Nation.capital_city)
 end
 
 20.times do
