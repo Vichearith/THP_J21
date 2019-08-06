@@ -24,13 +24,16 @@ JoinTableMessageRecipient.reset_pk_sequence
   city = City.create!(zip_code:  Faker::Address.zip_code, name:  Faker::Address.city)
 end
 
+anonymous = User.create!(first_name: "Anonymous", last_name: "Robot", description: Faker::ChuckNorris.fact, email: "anonymous@robot.mr", age: 100, city: City.find(rand(1..10)))
+
 10.times do
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.paragraph, email: Faker::Internet.email, age: Faker::Number.between(from: 18, to: 78), city: City.find(rand(1..10)))
 end
 
+
 20.times do
   gossip = Gossip.create!(
-    title:  Faker::Game.title, 
+    title:  Faker::GreekPhilosophers.name, 
     content:  Faker::Quote.matz, 
     user: User.find(rand(1..10)))
 end

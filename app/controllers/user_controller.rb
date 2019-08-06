@@ -1,6 +1,6 @@
 class UserController < ApplicationController
-  def display
+  def show
     @users = User.all
-    @index = params[:index]
+    @index = params[:id]
   end
 end

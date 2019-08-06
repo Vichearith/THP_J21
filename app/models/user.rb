@@ -5,4 +5,10 @@ class User < ApplicationRecord
   has_many :received_messages, foreign_key: 'recipient_id', class_name: "JoinTableMessageRecipient"
   has_many :comments
   has_many :likes
+  validates :first_name,
+  presence: true
+  validates :last_name,
+  presence: true
+  validates :email,
+  presence: true
 end

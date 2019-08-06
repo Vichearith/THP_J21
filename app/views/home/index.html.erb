@@ -4,28 +4,11 @@
     <div class="container">
       <h1 class="jumbotron-heading">Home</h1>
       <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+      <p>
+        <%=link_to "Créer un potin", new_gossip_path, :class => "btn btn-primary my-2"%>
+        <%=link_to "Voir les potins", gossips_path, :class => "btn btn-secondary my-2"%>
+      </p>
     </div>
   </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <% @gossips.each_with_index do |gossip,index| %>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">              
-              <%=link_to "#{gossip.title}", gossip_path(gossip.id), :class => "nav-link" %>
-              </h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h6>
-              <p class="card-text"><%= gossip.content %></p>
-              <a href="/gossip/<%=index+1%>" class="card-link">Card link</a>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
 
 </main>
