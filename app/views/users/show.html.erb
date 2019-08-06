@@ -7,7 +7,7 @@
     </p>
     <p>E-mail : <%= @users.find(@index).email%></p>
     <p>Âge : <%= @users.find(@index).age%> ans</p>
-    <p>Ville : <%= @users.find(@index).city.name%> - <%= @users.find(@index).city.zip_code%></p>
+    <p>Ville : <%=link_to "#{@users.find(@index).city.name} - #{@users.find(@index).city.zip_code}", city_path%></p>
     <p>Crée le <%= @users.find(@index).created_at.strftime("%d/%m/%Y")%></p>
     
     </main>
