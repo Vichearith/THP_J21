@@ -9,7 +9,7 @@
 
 
     <main role="main" class="inner cover my-auto">
-      <h1 class="cover-heading">Bienvenue <%=@first_name.capitalize%> !</h1>
+      <h1 class="cover-heading">Bienvenue <%= User.find_by(id: session[:user_id]).first_name.capitalize %> !</h1>
       <p class="lead">Ici c'est notre super site de potins, il est chouette, non ?</p>
     </main>
   </div>

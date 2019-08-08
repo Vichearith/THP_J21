@@ -1,16 +1,3 @@
-<header>
-  <% if @gossip.errors.any? %>
-    <div class="alert alert-warning mx-2 my-2 " role="alert">
-    <p>Nous n'avons pas réussi à éditer le potin pour la (ou les) raison(s) suivante(s) :</p>
-    <ul>
-      <% @gossip.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-    </div>
-  <% end %>
-</header>
-
 <body class="bg-light">
     <div class="container">
   <div class="py-5 text-center">
@@ -24,7 +11,7 @@
       <%=form_for @gossip do |f|%>
       <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
         <div class="row form-group">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-3 mb-3">
             <label>Titre</label>
             <%= f.text_field :title, class: "form-control"%>
             <small class="text-muted">Entre 3 et 14 caractères</small>
@@ -37,8 +24,12 @@
             <%= f.text_area :content, class: "form-control"%>
             <small class="text-muted">Vérifie tes sources !</small>
           <span style="opacity: 1; left: 270px; top: 44.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span></div>
+          <div class="col-md-3 mb-3">
+              <label>Tags</label>
+              <%=  f.select :tag_ids, @tags, {}, :multiple => true, class: "form-control" %>
+          </div>
         </div>
-        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Valider">
+        <%=f.submit class:"btn btn-primary btn-lg btn-block", value:"Valider"%>
       <%end%>
     </div>
   </div>

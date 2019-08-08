@@ -1,10 +1,10 @@
 <body class="d-flex flex-column h-100">
   <div class="container">
     <main role="main" class="my-auto">
-    <h1 class="mt-5"><%= @cities.find(@index).name%> - <%= @cities.find(@index).zip_code%></h1>
-    <p>Crée le <%= @cities.find(@index).created_at.strftime("%d/%m/%Y")%></p>
+    <h1 class="mt-5"><%= @city.name%> - <%= @city.zip_code%></h1>
+    <p>Crée le <%= @city.created_at.strftime("%d/%m/%Y")%></p>
     Users : 
-      <% @cities.find(@index).users.each_with_index do |i,index| %>
+      <% @city.users.each_with_index do |i,index| %>
         <div class="album py-5">
             <div class="container">
             <%=link_to "#{i.first_name} #{i.last_name}", user_path(index), :class => "h4"%>
@@ -18,7 +18,19 @@
                       </h5>
                       <h6 class="card-subtitle mb-2 text-muted"><%= j.user.first_name %> <%= j.user.last_name %></h6>
                       <p class="card-text"><%= j.content %></p>
-                      <%=link_to "Card link", gossip_path(j.id), :class => "nav-link" %>
+                      <div class="row">
+                        <div class="col">
+                          <%=j.likes.count %> 
+                          <%if logged_in? && liked?(j.id)%>
+                          <%=link_to "👍", gossip_like_path(j), method: :delete%>
+                          <%elsif logged_in? && !liked?(j.id)%>
+                          <%=link_to "👍🏻", gossip_likes_path(j), method: :post%>
+                          <%else%>
+                          <%= link_to "👍🏻", new_session_path%>
+                          <%end%>                        
+                        </div> 
+                        <div class="col text-right"><%=j.comments.count%> commentaires</div>
+                      </div>
                     </div>
                   </div>
                 </div>

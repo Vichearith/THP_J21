@@ -4,4 +4,9 @@ class Tag < ApplicationRecord
   validates :title,
   presence: true,
   length: { in: 3..14 }
+
+  def self.tag_array
+    Tag.all.collect {|x| [x.title, x.id]}
+  end
+  
 end
