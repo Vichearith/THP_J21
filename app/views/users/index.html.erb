@@ -15,11 +15,10 @@
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
               <h5 class="card-title">              
-              <%=link_to "#{user.first_name} #{user.last_name}", user_path(user.id), :class => "nav-link" %>
+              <%=link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%>
               </h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= user.email %></h6>
               <p class="card-text"><%= user.description %></p>
-              <%=link_to "Card link", user_path(user.id), :class => "nav-link" %>
             </div>
           </div>
         </div>

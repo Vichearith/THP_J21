@@ -4,17 +4,17 @@
     <h1 class="mt-5"><%= @city.name%> - <%= @city.zip_code%></h1>
     <p>Crée le <%= @city.created_at.strftime("%d/%m/%Y")%></p>
     Users : 
-      <% @city.users.each_with_index do |i,index| %>
-        <div class="album py-5">
+      <% @city.users.each do |i| %>
+        <div class="album py-2">
             <div class="container">
-            <%=link_to "#{i.first_name} #{i.last_name}", user_path(index), :class => "h4"%>
-              <div class="row">
+            <%=link_to "#{i.first_name} #{i.last_name}", user_path(i.id), :class => "h4 mx-1"%>
+              <div class="row pt-2">
                 <%i.gossips.each do |j| %>
                 <div class="col-md-4">
                   <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                       <h5 class="card-title">              
-                      <%=link_to "#{j.title}", gossip_path(j.id), :class => "nav-link" %>
+                      <%=link_to "#{j.title}", gossip_path(j.id) %>
                       </h5>
                       <h6 class="card-subtitle mb-2 text-muted"><%= j.user.first_name %> <%= j.user.last_name %></h6>
                       <p class="card-text"><%= j.content %></p>
