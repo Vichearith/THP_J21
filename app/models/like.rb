@@ -4,6 +4,6 @@ class Like < ApplicationRecord
   validates :user_id,
   presence: true, 
   uniqueness: {scope: [:likeable_id, :likeable_type]}
-  validates :likeable_id,
-  presence: true
+  # validates :likeable_id,
+  # presence: true
 end
