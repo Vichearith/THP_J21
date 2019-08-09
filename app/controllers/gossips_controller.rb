@@ -11,7 +11,7 @@ class GossipsController < ApplicationController
     @gossip.user = User.find_by(id: session[:user_id])
     if @gossip.save
       flash[:success] = "Potin créé"
-      redirect_to index
+      redirect_to gossips_path
     else
       render :new
     end
