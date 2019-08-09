@@ -38,7 +38,7 @@
           <span style="opacity: 1; left: 270px; top: 44.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span></div>
           <div class="col-md-3 mb-3">
               <label>Tags</label>
-              <%= f.select :tag_ids, @tags, {}, :multiple => true, class: "form-control"  %>
+              <%= f.select :tag_ids, options_for_select(@tags), :multiple => true, class: "form-control"  %>
           </div>
         </div>
         <%=f.submit class:"btn btn-primary btn-lg btn-block", value:"Valider"%>

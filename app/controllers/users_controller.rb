@@ -16,8 +16,9 @@ class UsersController < ApplicationController
     @cities = City.all.collect {|x| [x.name, x.id]}
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = 'Utilisateur créé'
-      render :index
+      flash[:success] = "Vous êtes inscrits !"
+      session[:user_id] = @user.id
+      redirect_to gossips_path
     else
       flash[:error] = "L'utilisateur n'a pas été créé"
       render new_user_path
