@@ -7,8 +7,8 @@ Tag.destroy_all
 JoinTableGossipsTag.destroy_all
 Like.destroy_all
 Comment.destroy_all
-PrivateMessage.destroy_all
-JoinTableMessageRecipient.destroy_all
+Message.destroy_all
+Conversation.destroy_all
 
 City.reset_pk_sequence
 User.reset_pk_sequence
@@ -17,8 +17,8 @@ Tag.reset_pk_sequence
 JoinTableGossipsTag.reset_pk_sequence
 Like.reset_pk_sequence
 Comment.reset_pk_sequence
-PrivateMessage.reset_pk_sequence
-JoinTableMessageRecipient.reset_pk_sequence
+Message.reset_pk_sequence
+Conversation.reset_pk_sequence
 
 10.times do
   city = City.create!(zip_code:  Faker::Address.zip_code, name:  Faker::Address.city)
@@ -77,15 +77,16 @@ end
     Comment.where(commentable_type: "gossip", commentable_id: nil).update(commentable: Gossip.find(rand(1..20))))
 end
 
-20.times do # Permet d'envoyer un message depuis un sender à 1 ou plusieurs recipients, en évitant de s'envoyer le message à soi-même et d'envoyer le message plusieurs fois au même recipient
-  senders = User.all.to_a # On récupère tous les users dans un array
-  sender = senders.sample # On récupère un user au hasard
-  senders.delete(sender) # On enlève de l'array de tous les user le sender
-  content = Faker::Lorem.sentence
-  nb_recipients = rand(1..senders.length) # On génère un nombre de recipients au hasard
-  nb_recipients.times do
-    recipient = senders.sample # On récupère un recipient depuis l'array 
-    senders.delete(recipient) # On le remove de l'array
-    JoinTableMessageRecipient.create(private_message: PrivateMessage.create(sender: sender, content: content), recipient: recipient)
-  end
-end
+# User.count.times do # Permet d'envoyer un message depuis un sender à 1 ou plusieurs recipients, en évitant de s'envoyer le message à soi-même et d'envoyer le message plusieurs fois au même recipient
+#   senders = User.all.to_a # On récupère tous les users dans un array
+#   sender = senders.sample # On récupère un user au hasard
+#   senders.delete(sender) # On enlève de l'array de tous les user le sender
+#   content = Faker::Lorem.sentence
+#   # nb_recipients = rand(1..senders.length) # On génère un nombre de recipients au hasard
+#   # nb_recipients.times do
+#     recipient = senders.sample # On récupère un recipient depuis l'array 
+#     senders.delete(recipient) # On le remove de l'array
+#     conversation = Conversation.create!(sender: sender,recipient: recipient)
+#     JoinTableMessageRecipient.create!(message: Message.create(sender: sender, content: content, conversation: conversation), recipient: recipient)
+#   # end
+# end

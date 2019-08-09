@@ -22,13 +22,18 @@
       <label for="inputPassword" class="sr-only">Mot de passe</label>
       <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder:"Mot de passe"%>
       <div class="row">
+        <div class="col-md-12">
+          <%= f.password_field :password_confirmation, class: "form-control", id: "confirmPassword", placeholder:"Confirmation Mot de passe"%>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6 mb-3">
           <label for="inputAge">Âge</label>
           <%= f.text_field :age, class: "form-control", id: "age", placeholder:"Âge"%>
         </div>
         <div class="col-md-6 mb-3">
           <label for="inputCity">Ville</label>
-            <%=  f.select :city_id, @cities, {}, class: "form-control" %>
+          <%= f.select :city, options_from_collection_for_select(City.all,"id", "name"), class:'form-control' %>
         </div>
       </div>
        <div class="col-md-12 mb-3">

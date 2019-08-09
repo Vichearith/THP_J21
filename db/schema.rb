@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_073600) do
+ActiveRecord::Schema.define(version: 2019_08_09_163741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_073600) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
   create_table "gossips", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -51,15 +60,6 @@ ActiveRecord::Schema.define(version: 2019_08_07_073600) do
     t.index ["tag_id"], name: "index_join_table_gossips_tags_on_tag_id"
   end
 
-  create_table "join_table_message_recipients", force: :cascade do |t|
-    t.bigint "private_message_id"
-    t.bigint "recipient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["private_message_id"], name: "index_join_table_message_recipients_on_private_message_id"
-    t.index ["recipient_id"], name: "index_join_table_message_recipients_on_recipient_id"
-  end
-
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.string "likeable_type"
@@ -70,12 +70,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_073600) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "private_messages", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.text "content"
     t.bigint "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sender_id"], name: "index_private_messages_on_sender_id"
+    t.bigint "conversation_id"
+    t.boolean "read", default: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -94,6 +97,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_073600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "remember_digest"
     t.index ["city_id"], name: "index_users_on_city_id"
   end
 

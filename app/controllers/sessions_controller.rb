@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  
+  include SessionsHelper
+
   def new
   end
 
@@ -10,6 +11,8 @@ class SessionsController < ApplicationController
     # # on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      remember user
       flash[:success] = 'Connexion réussi'
       redirect_to user
 
@@ -20,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
+    log_out if logged_in?
     flash[:success] = 'Déconnexion réussi'
     redirect_to :root
   end
